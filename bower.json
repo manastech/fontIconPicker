@@ -1,7 +1,7 @@
 {
-    "name": "fontIconPicker",
-    "version": "2.0.0",
-    "description": "An icon picker built on top of font icons and jQuery",
+    "name": "fontIconPicker-manastech",
+    "version": "2.0.1",
+    "description": "manas.tech's fork of an icon picker built on top of font icons and jQuery",
     "keywords": [
         "icons",
         "font icons",

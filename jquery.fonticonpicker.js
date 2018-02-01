@@ -1,5 +1,5 @@
 /**
- *  jQuery fontIconPicker - v2.0.0
+ *  jQuery fontIconPicker - v2.0.2
  *
  *  An icon picker built on top of font icons and jQuery
  *
@@ -11,25 +11,25 @@
  * {@link https://github.com/micc83/fontIconPicker}
  */
 
-;(function ($) {
+; (function ($) {
 
 	'use strict';
 
 	// Create the defaults once
 	var defaults = {
-			theme             : 'fip-grey',              // The CSS theme to use with this fontIconPicker. You can set different themes on multiple elements on the same page
-			source            : false,                   // Icons source (array|false|object)
-			emptyIcon         : true,                    // Empty icon should be shown?
-			emptyIconValue    : '',                      // The value of the empty icon, change if you select has something else, say "none"
-			iconsPerPage      : 20,                      // Number of icons per page
-			hasSearch         : true,                    // Is search enabled?
-			searchSource      : false,                   // Give a manual search values. If using attributes then for proper search feature we also need to pass icon names under the same order of source
-			useAttribute      : false,                   // Whether to use attribute selector for printing icons
-			attributeName     : 'data-icon',             // HTML Attribute name
-			convertToHex      : true,                    // Whether or not to convert to hexadecimal for attribute value. If true then please pass decimal integer value to the source (or as value="" attribute of the select field)
-			allCategoryText   : 'From all categories',   // The text for the select all category option
-			unCategorizedText : 'Uncategorized'          // The text for the select uncategorized option
-		};
+		theme: 'fip-grey',              // The CSS theme to use with this fontIconPicker. You can set different themes on multiple elements on the same page
+		source: false,                   // Icons source (array|false|object)
+		emptyIcon: true,                    // Empty icon should be shown?
+		emptyIconValue: '',                      // The value of the empty icon, change if you select has something else, say "none"
+		iconsPerPage: 20,                      // Number of icons per page
+		hasSearch: true,                    // Is search enabled?
+		searchSource: false,                   // Give a manual search values. If using attributes then for proper search feature we also need to pass icon names under the same order of source
+		useAttribute: false,                   // Whether to use attribute selector for printing icons
+		attributeName: 'data-icon',             // HTML Attribute name
+		convertToHex: true,                    // Whether or not to convert to hexadecimal for attribute value. If true then please pass decimal integer value to the source (or as value="" attribute of the select field)
+		allCategoryText: 'From all categories',   // The text for the select all category option
+		unCategorizedText: 'Uncategorized'          // The text for the select uncategorized option
+	};
 
 	// The actual plugin constructor
 	function Plugin(element, options) {
@@ -39,38 +39,38 @@
 			this.settings.iconsPerPage--;
 		}
 		this.iconPicker = $('<div/>', {
-			'class':    'icons-selector',
-			style:      'position: relative',
-			html:       '<div class="selector">' +
-							'<span class="selected-icon">' +
-								'<i class="fip-icon-block"></i>' +
-							'</span>' +
-							'<span class="selector-button">' +
-								'<i class="fip-icon-down-dir"></i>' +
-							'</span>' +
-						 '</div>' +
-						 '<div class="selector-popup" style="display: none;">' + ((this.settings.hasSearch) ?
-							 '<div class="selector-search">' +
-								 '<input type="text" name="" value="" placeholder="Search icon" class="icons-search-input"/>' +
-								 '<i class="fip-icon-search"></i>' +
-							 '</div>' : '') +
-							 '<div class="selector-category">' +
-								 '<select name="" class="icon-category-select" style="display: none">' +
-								 '</select>' +
-							 '</div>' +
-							 '<div class="fip-icons-container"></div>' +
-							 '<div class="selector-footer" style="display:none;">' +
-								 '<span class="selector-pages">1/2</span>' +
-								 '<span class="selector-arrows">' +
-									 '<span class="selector-arrow-left" style="display:none;">' +
-										 '<i class="fip-icon-left-dir"></i>' +
-									 '</span>' +
-									 '<span class="selector-arrow-right">' +
-										 '<i class="fip-icon-right-dir"></i>' +
-									 '</span>' +
-								 '</span>' +
-							 '</div>' +
-						 '</div>'
+			'class': 'icons-selector',
+			style: 'position: relative',
+			html: '<div class="selector">' +
+				'<span class="selected-icon">' +
+				'<i class="fip-icon-block"></i>' +
+				'</span>' +
+				'<span class="selector-button">' +
+				'<i class="fip-icon-down-dir"></i>' +
+				'</span>' +
+				'</div>' +
+				'<div class="selector-popup" style="display: none;">' + ((this.settings.hasSearch) ?
+					'<div class="selector-search">' +
+					'<input type="text" name="" value="" placeholder="Search icon" class="icons-search-input"/>' +
+					'<i class="fip-icon-search"></i>' +
+					'</div>' : '') +
+				'<div class="selector-category">' +
+				'<select name="" class="icon-category-select" style="display: none">' +
+				'</select>' +
+				'</div>' +
+				'<div class="fip-icons-container"></div>' +
+				'<div class="selector-footer" style="display:none;">' +
+				'<span class="selector-pages">1/2</span>' +
+				'<span class="selector-arrows">' +
+				'<span class="selector-arrow-left" style="display:none;">' +
+				'<i class="fip-icon-left-dir"></i>' +
+				'</span>' +
+				'<span class="selector-arrow-right">' +
+				'<i class="fip-icon-right-dir"></i>' +
+				'</span>' +
+				'</span>' +
+				'</div>' +
+				'</div>'
 		});
 		this.iconContainer = this.iconPicker.find('.fip-icons-container');
 		this.searchIcon = this.iconPicker.find('.selector-search i');
@@ -120,7 +120,7 @@
 				left: -9999
 			}).appendTo('body');
 			var iconPickerHeight = this.iconPicker.outerHeight(),
-			iconPickerWidth = this.iconPicker.outerWidth();
+				iconPickerWidth = this.iconPicker.outerWidth();
 
 			// Now reset the iconPicker CSS
 			this.iconPicker.css({
@@ -152,16 +152,16 @@
 			});
 
 			// Set the trigger event
-			if ( ! this.element.is('select') ) {
+			if (!this.element.is('select')) {
 				// Determine the event that is fired when user change the field value
 				// Most modern browsers supports input event except IE 7, 8.
 				// IE 9 supports input event but the event is still not fired if I press the backspace key.
 				// Get IE version
 				// https://gist.github.com/padolsey/527683/#comment-7595
-				var ieVersion = (function() {
-				    var v = 3, div = document.createElement('div'), a = div.all || [];
-				    while (div.innerHTML = '<!--[if gt IE '+(++v)+']><br><![endif]-->', a[0]);
-				    return v > 4 ? v : !v;
+				var ieVersion = (function () {
+					var v = 3, div = document.createElement('div'), a = div.all || [];
+					while (div.innerHTML = '<!--[if gt IE ' + (++v) + ']><br><![endif]-->', a[0]);
+					return v > 4 ? v : !v;
 				}());
 				var el = document.createElement('div');
 				this.triggerEvent = (ieVersion === 9 || !('oninput' in el)) ? ['keyup'] : ['input', 'keyup']; // Let's keep the keyup event for scripts that listens to it
@@ -176,14 +176,14 @@
 
 				// Check if optgroup is present within the select
 				// If it is present then the source has to be grouped
-				if ( this.element.find('optgroup').length ) {
+				if (this.element.find('optgroup').length) {
 					// Set the categorized to true
 					this.isCategorized = true;
-					this.element.find('optgroup').each($.proxy(function(i, el) {
+					this.element.find('optgroup').each($.proxy(function (i, el) {
 						// Get the key of the new category array
 						var thisCategoryKey = this.availableCategories.length,
-						// Create the new option for the selectCategory SELECT field
-						categoryOption = $('<option />');
+							// Create the new option for the selectCategory SELECT field
+							categoryOption = $('<option />');
 
 						// Set the value to this categorykey
 						categoryOption.attr('value', thisCategoryKey);
@@ -198,9 +198,9 @@
 						this.availableCategoriesSearch[thisCategoryKey] = [];
 
 						// Now loop through it's option elements and add the icons
-						$(el).find('option').each($.proxy(function(i, cel) {
+						$(el).find('option').each($.proxy(function (i, cel) {
 							var newIconValue = $(cel).val(),
-							newIconLabel = $(cel).html();
+								newIconLabel = $(cel).html();
 
 							// Check if the option element has value and this value does not equal to the empty value
 							if (newIconValue && newIconValue !== this.settings.emptyIconValue) {
@@ -218,18 +218,18 @@
 					}, this));
 
 					// Additionally check for any first label option child
-					if ( this.element.find('> option').length ) {
-						this.element.find('> option').each($.proxy(function(i, el) {
+					if (this.element.find('> option').length) {
+						this.element.find('> option').each($.proxy(function (i, el) {
 							var newIconValue = $(el).val(),
-							newIconLabel = $(el).html();
+								newIconLabel = $(el).html();
 
 							// Don't do anything if the new icon value is empty
-							if ( !newIconValue || newIconValue === '' || newIconValue == this.settings.emptyIconValue ) {
+							if (!newIconValue || newIconValue === '' || newIconValue == this.settings.emptyIconValue) {
 								return true;
 							}
 
 							// Set the uncategorized key if not set already
-							if ( this.unCategorizedKey === null ) {
+							if (this.unCategorizedKey === null) {
 								this.unCategorizedKey = this.availableCategories.length;
 								this.availableCategories[this.unCategorizedKey] = [];
 								this.availableCategoriesSearch[this.unCategorizedKey] = [];
@@ -246,11 +246,11 @@
 							this.availableCategoriesSearch[this.unCategorizedKey].push(newIconLabel);
 						}, this));
 					}
-				// Not categorized
+					// Not categorized
 				} else {
 					this.element.find('option').each($.proxy(function (i, el) {
 						var newIconValue = $(el).val(),
-						newIconLabel = $(el).html();
+							newIconLabel = $(el).html();
 						if (newIconValue) {
 							this.settings.source.push(newIconValue);
 							this.searchValues.push(newIconLabel);
@@ -264,7 +264,7 @@
 
 				// load the categories
 				this.loadCategories();
-			// Normalize the given source
+				// Normalize the given source
 			} else {
 				this.initSourceIndex();
 				// No need to call loadCategories or take backups because these are called from the initSourceIndex
@@ -276,20 +276,20 @@
 			/**
 			 * Category changer
 			 */
-			this.selectCategory.on('change keyup', $.proxy(function(e) {
+			this.selectCategory.on('change keyup', $.proxy(function (e) {
 				// Don't do anything if not categorized
-				if ( this.isCategorized === false ) {
+				if (this.isCategorized === false) {
 					return false;
 				}
 				var targetSelect = $(e.currentTarget),
-				currentCategory = targetSelect.val();
+					currentCategory = targetSelect.val();
 				// Check if all categories are selected
 				if (targetSelect.val() === 'all') {
 					// Restore from the backups
 					// @note These backups must be rebuild on source change, otherwise it will lead to error
 					this.settings.source = this.backupSource;
 					this.searchValues = this.backupSearch;
-				// No? So there is a specified category
+					// No? So there is a specified category
 				} else {
 					var key = parseInt(currentCategory, 10);
 					if (this.availableCategories[key]) {
@@ -423,9 +423,9 @@
 		 * Init the source & search index from the current settings
 		 * @return {void}
 		 */
-		initSourceIndex: function() {
+		initSourceIndex: function () {
 			// First check for any sorts of errors
-			if ( typeof(this.settings.source) !== 'object' ) {
+			if (typeof (this.settings.source) !== 'object') {
 				return;
 			}
 
@@ -439,8 +439,8 @@
 
 				// We are going to convert the source items to string
 				// This is necessary because passed source might not be "strings" for attribute related icons
-				this.settings.source = $.map(this.settings.source, function(e, i) {
-					if ( typeof(e.toString) == 'function' ) {
+				this.settings.source = $.map(this.settings.source, function (e, i) {
+					if (typeof (e.toString) == 'function') {
 						return e.toString();
 					} else {
 						return e;
@@ -449,20 +449,20 @@
 
 				// Now update the search
 				// First check if the search is given by user
-				if ( $.isArray(this.settings.searchSource) ) {
+				if ($.isArray(this.settings.searchSource)) {
 					// Convert everything inside the searchSource to string
-					this.searchValues = $.map(this.settings.searchSource, function(e, i) {
-						if ( typeof(e.toString) == 'function' ) {
+					this.searchValues = $.map(this.settings.searchSource, function (e, i) {
+						if (typeof (e.toString) == 'function') {
 							return e.toString();
 						} else {
 							return e;
 						}
 					}); // Clone the searchSource
-				// Not given so use the source instead
+					// Not given so use the source instead
 				} else {
 					this.searchValues = this.settings.source.slice(0); // Clone the source
 				}
-			// Categorized icon set
+				// Categorized icon set
 			} else {
 				var originalSource = $.extend(true, {}, this.settings.source);
 
@@ -484,8 +484,8 @@
 				for (var categoryLabel in originalSource) {
 					// Get the key of the new category array
 					var thisCategoryKey = this.availableCategories.length,
-					// Create the new option for the selectCategory SELECT field
-					categoryOption = $('<option />');
+						// Create the new option for the selectCategory SELECT field
+						categoryOption = $('<option />');
 
 					// Set the value to this categorykey
 					categoryOption.attr('value', thisCategoryKey);
@@ -500,17 +500,17 @@
 					this.availableCategoriesSearch[thisCategoryKey] = [];
 
 					// Now loop through it's icons and add to the list
-					for ( var newIconKey in originalSource[categoryLabel] ) {
+					for (var newIconKey in originalSource[categoryLabel]) {
 						// Get the new icon value
 						var newIconValue = originalSource[categoryLabel][newIconKey];
 						// Get the label either from the searchSource if set, otherwise from the source itself
 						var newIconLabel = (this.settings.searchSource && this.settings.searchSource[categoryLabel] && this.settings.searchSource[categoryLabel][newIconKey]) ?
-											this.settings.searchSource[categoryLabel][newIconKey] : newIconValue;
+							this.settings.searchSource[categoryLabel][newIconKey] : newIconValue;
 
 						// Try to convert to the source value string
 						// This is to avoid attribute related icon sets
 						// Where hexadecimal or decimal numbers might be passed
-						if ( typeof(newIconValue.toString) == 'function' ) {
+						if (typeof (newIconValue.toString) == 'function') {
 							newIconValue = newIconValue.toString();
 						}
 						// Check if the option element has value and this value does not equal to the empty value
@@ -541,9 +541,9 @@
 		 * Load Categories
 		 * @return {void}
 		 */
-		loadCategories: function() {
+		loadCategories: function () {
 			// Dont do anything if it is not categorized
-			if ( this.isCategorized === false ) {
+			if (this.isCategorized === false) {
 				return;
 			}
 
@@ -572,11 +572,11 @@
 
 		},
 
-		iconGenerator: function(item) {
+		iconGenerator: function (item) {
 			if (this.settings.iconGenerator) {
 				return this.settings.iconGenerator(item);
 			}
-			return '<i data-fip-value="' + item + '" ' + (this.settings.useAttribute ? (this.settings.attributeName + '="' + ( this.settings.convertToHex ? '&#x' + parseInt(item, 10).toString(16) + ';' : item ) + '"') : 'class="' + item + '"') + '></i>';
+			return '<i data-fip-value="' + item + '" ' + (this.settings.useAttribute ? (this.settings.attributeName + '="' + (this.settings.convertToHex ? '&#x' + parseInt(item, 10).toString(16) + ';' : item) + '"') : 'class="' + item + '"') + '></i>';
 		},
 
 		/**
@@ -617,12 +617,12 @@
 				// Reset icon container HTML and prepend empty icon
 				this.iconContainer.html('<span class="fip-box"><i class="fip-icon-block" data-fip-value="fip-icon-block"></i></span>');
 
-			// If not show an error when no icons are found
+				// If not show an error when no icons are found
 			} else if (iconsPaged.length < 1) {
 				this.iconContainer.html('<span class="icons-picker-error"><i class="fip-icon-block" data-fip-value="fip-icon-block"></i></span>');
 				return;
 
-			// else empty the container
+				// else empty the container
 			} else {
 				this.iconContainer.html('');
 			}
@@ -634,9 +634,9 @@
 			for (var i = 0, item; item = iconsPaged[i++];) {
 				// Set the icon title
 				var flipBoxTitle = item;
-				$.grep(this.settings.source, $.proxy(function(e, i) {
-					if ( e === item ) {
-						flipBoxTitle =  this.searchValues[i];
+				$.grep(this.settings.source, $.proxy(function (e, i) {
+					if (e === item) {
+						flipBoxTitle = this.searchValues[i];
 						return true;
 					}
 					return false;
@@ -644,8 +644,8 @@
 
 				// Set the icon box
 				$('<span/>', {
-					html:      this.iconGenerator(item),
-					'class':   'fip-box',
+					html: this.iconGenerator(item),
+					'class': 'fip-box',
 					title: flipBoxTitle
 				}).appendTo(this.iconContainer);
 			}
@@ -690,21 +690,21 @@
 			}
 
 			// Check if attribute is to be used
-			if ( this.settings.useAttribute ) {
-				if ( theIcon ) {
-					this.iconPicker.find('.selected-icon').html('<i ' + this.settings.attributeName + '="' + ( this.settings.convertToHex ? '&#x' + parseInt(theIcon, 10).toString(16) + ';' : theIcon ) + '"></i>' );
+			if (this.settings.useAttribute) {
+				if (theIcon) {
+					this.iconPicker.find('.selected-icon').html('<i ' + this.settings.attributeName + '="' + (this.settings.convertToHex ? '&#x' + parseInt(theIcon, 10).toString(16) + ';' : theIcon) + '"></i>');
 				} else {
 					this.iconPicker.find('.selected-icon').html('<i class="fip-icon-block"></i>');
 				}
-			// Use class
+				// Use class
 			} else {
-				this.iconPicker.find('.selected-icon').html('<i class="' + (theIcon || 'fip-icon-block') + '"></i>');
+				this.iconPicker.find('.selected-icon').html('<i class="' + (theIcon || 'fip-icon-block') + '">' + (theIcon || 'fip-icon-block') + '</i>');
 			}
 			// Set the value of the element and trigger change event
-			this.element.val((theIcon === '' ? this.settings.emptyIconValue : theIcon )).trigger('change');
-			if ( this.triggerEvent !== null ) {
+			this.element.val((theIcon === '' ? this.settings.emptyIconValue : theIcon)).trigger('change');
+			if (this.triggerEvent !== null) {
 				// Trigger other events
-				for ( var eventKey in this.triggerEvent ) {
+				for (var eventKey in this.triggerEvent) {
 					this.element.trigger(this.triggerEvent[eventKey]);
 				}
 			}
@@ -764,10 +764,10 @@
 
 		// setIcons method
 		this.setIcons = $.proxy(function (newIcons, iconSearch) {
-			if ( undefined === newIcons ) {
+			if (undefined === newIcons) {
 				newIcons = false;
 			}
-			if ( undefined === iconSearch ) {
+			if (undefined === iconSearch) {
 				iconSearch = false;
 			}
 			this.each(function () {
@@ -780,8 +780,8 @@
 		}, this);
 
 		// destroy method
-		this.destroyPicker = $.proxy(function() {
-			this.each(function() {
+		this.destroyPicker = $.proxy(function () {
+			this.each(function () {
 				if (!$.data(this, "fontIconPicker")) {
 					return;
 				}
@@ -809,15 +809,15 @@
 		}, this);
 
 		// reInit method
-		this.refreshPicker = $.proxy(function(newOptions) {
-			if ( ! newOptions ) {
+		this.refreshPicker = $.proxy(function (newOptions) {
+			if (!newOptions) {
 				newOptions = options;
 			}
 			// First destroy
 			this.destroyPicker();
 
 			// Now reset
-			this.each(function() {
+			this.each(function () {
 				if (!$.data(this, "fontIconPicker")) {
 					$.data(this, "fontIconPicker", new Plugin(this, newOptions));
 				}
